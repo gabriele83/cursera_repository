@@ -2,27 +2,61 @@ package funsets
 import FunSets._
 
 object ws {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(90); 
-  println("Welcome to the Scala worksheet");$skip(30); 
+  println("Welcome to the Scala worksheet");$skip(51); 
 
-  def f1 = (x: Int) => true;System.out.println("""f1: => Int => Boolean""");$skip(29); 
-  def f2 = (x: Int) => false;System.out.println("""f2: => Int => Boolean""");$skip(30); 
-  def f3 = (x: Int) => x == 2;System.out.println("""f3: => Int => Boolean""");$skip(31); 
-  def f4 = (x: Int) => x == 10;System.out.println("""f4: => Int => Boolean""");$skip(41); 
-  def f5 = (x: Int) => x == 2 || x == 10;System.out.println("""f5: => Int => Boolean""");$skip(34); 
-  def f6 = (x: Int) => x % 2 == 0;System.out.println("""f6: => Int => Boolean""");$skip(19); 
+  // set
+  var s = Set(-1000, -1, 0, 1, 2, 1000);System.out.println("""s  : scala.collection.immutable.Set[Int] = """ + $show(s ));$skip(36); 
+  var sC = Set(1, 3, 4, 5, 7, 1000);System.out.println("""sC  : scala.collection.immutable.Set[Int] = """ + $show(sC ));$skip(28); 
+  var s14 = Set(1, 2, 3, 4);System.out.println("""s14  : scala.collection.immutable.Set[Int] = """ + $show(s14 ));$skip(28); 
+  var s36 = Set(3, 4, 5, 6);System.out.println("""s36  : scala.collection.immutable.Set[Int] = """ + $show(s36 ));$skip(48); 
 
-  println(f3(1));$skip(40); 
-  println(contains(Set(1, 2, 3, 4), 1));$skip(64); 
-  println(contains(union(Set(1, 2, 3, 4), Set(6, 7, 8, 9)), 5));$skip(68); 
-  println(contains(intersect(singletonSet(2), singletonSet(2)), 2));$skip(52); 
-  println(contains(filter(Set(1, 2, 3, 4), f5), 1));$skip(52); 
-  println(contains(filter(Set(1, 2, 3, 4), f5), 2));$skip(52); 
-  println(contains(filter(Set(1, 2, 3, 4), f5), 3));$skip(91); 
-                                                  
-  printSet(filter(Set(1, 2, 3, 4), f5))}
+  // function
+  def f_true = (x: Int) => true;System.out.println("""f_true: => Int => Boolean""");$skip(34); 
+  def f_false = (x: Int) => false;System.out.println("""f_false: => Int => Boolean""");$skip(33); 
+  def f_eq2 = (x: Int) => x == 2;System.out.println("""f_eq2: => Int => Boolean""");$skip(51); 
+  def f_gt5_lt10 = (x: Int) => (x >= 5 && x <= 10);System.out.println("""f_gt5_lt10: => Int => Boolean""");$skip(38); 
+  def f_even = (x: Int) => x % 2 == 0;System.out.println("""f_even: => Int => Boolean""");$skip(25); 
+
+  printSet(f_gt5_lt10);$skip(41); 
+
+  // union
+  printSet(union(s14, s36));$skip(30); 
+  printSet(union(s, f_false));$skip(30); 
+  printSet(union(s36, f_eq2));$skip(35); 
+  printSet(union(s14, f_gt5_lt10));$skip(50); 
+
+  // intersect
+  printSet(intersect(s, f_true));$skip(36); 
+  printSet(intersect(s14, f_false));$skip(34); 
+  printSet(intersect(s14, f_eq2));$skip(39); 
+  printSet(intersect(s36, f_gt5_lt10));$skip(35); 
+  printSet(intersect(s14, f_even));$skip(44); 
+
+  // filter
+  printSet(filter(s, f_true));$skip(33); 
+  printSet(filter(s14, f_false));$skip(31); 
+  printSet(filter(s14, f_eq2));$skip(36); 
+  printSet(filter(s36, f_gt5_lt10));$skip(32); 
+  printSet(filter(s14, f_even));$skip(43); 
+
+  // diff
+  printSet(diff(s14, f_false));$skip(29); 
+  printSet(diff(s14, f_eq2));$skip(34); 
+  printSet(diff(s36, f_gt5_lt10));$skip(34); val res$0 = 
+
+  // forall
+  forall(s, f_true);System.out.println("""res0: Boolean = """ + $show(res$0));$skip(23); val res$1 = 
+  forall(s14, f_false);System.out.println("""res1: Boolean = """ + $show(res$1));$skip(21); val res$2 = 
+  forall(s14, f_eq2);System.out.println("""res2: Boolean = """ + $show(res$2));$skip(26); val res$3 = 
+  forall(s36, f_gt5_lt10);System.out.println("""res3: Boolean = """ + $show(res$3));$skip(22); val res$4 = 
+  forall(s14, f_even);System.out.println("""res4: Boolean = """ + $show(res$4));$skip(34); val res$5 = 
+
+  // exists
+  exists(s, f_true);System.out.println("""res5: Boolean = """ + $show(res$5));$skip(23); val res$6 = 
+  exists(s14, f_false);System.out.println("""res6: Boolean = """ + $show(res$6));$skip(21); val res$7 = 
+  exists(s14, f_eq2);System.out.println("""res7: Boolean = """ + $show(res$7));$skip(26); val res$8 = 
+  exists(s36, f_gt5_lt10);System.out.println("""res8: Boolean = """ + $show(res$8));$skip(22); val res$9 = 
+  exists(s14, f_even);System.out.println("""res9: Boolean = """ + $show(res$9))}
   
-  
-  
-  
-  
+
 }
