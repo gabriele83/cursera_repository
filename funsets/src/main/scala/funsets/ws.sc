@@ -58,5 +58,6 @@ object ws {
   exists(s36, f_gt5_lt10)                         //> res8: Boolean = true
   exists(s14, f_even)                             //> res9: Boolean = true
   
+  
 
 }

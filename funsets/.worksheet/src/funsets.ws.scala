@@ -58,5 +58,6 @@ object ws {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; de
   exists(s36, f_gt5_lt10);System.out.println("""res8: Boolean = """ + $show(res$8));$skip(22); val res$9 = 
   exists(s14, f_even);System.out.println("""res9: Boolean = """ + $show(res$9))}
   
+  
 
 }
