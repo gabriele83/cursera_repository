@@ -15,7 +15,10 @@ object ws {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; de
   def f_false = (x: Int) => false;System.out.println("""f_false: => Int => Boolean""");$skip(33); 
   def f_eq2 = (x: Int) => x == 2;System.out.println("""f_eq2: => Int => Boolean""");$skip(51); 
   def f_gt5_lt10 = (x: Int) => (x >= 5 && x <= 10);System.out.println("""f_gt5_lt10: => Int => Boolean""");$skip(38); 
-  def f_even = (x: Int) => x % 2 == 0;System.out.println("""f_even: => Int => Boolean""");$skip(25); 
+  def f_even = (x: Int) => x % 2 == 0;System.out.println("""f_even: => Int => Boolean""");$skip(14); val res$0 = 
+  
+  f_eq2(3);System.out.println("""res0: Boolean = """ + $show(res$0));$skip(11); val res$1 = 
+  f_eq2(2);System.out.println("""res1: Boolean = """ + $show(res$1));$skip(25); 
 
   printSet(f_gt5_lt10);$skip(41); 
 
@@ -42,22 +45,23 @@ object ws {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; de
   // diff
   printSet(diff(s14, f_false));$skip(29); 
   printSet(diff(s14, f_eq2));$skip(34); 
-  printSet(diff(s36, f_gt5_lt10));$skip(34); val res$0 = 
+  printSet(diff(s36, f_gt5_lt10));$skip(34); val res$2 = 
 
   // forall
-  forall(s, f_true);System.out.println("""res0: Boolean = """ + $show(res$0));$skip(23); val res$1 = 
-  forall(s14, f_false);System.out.println("""res1: Boolean = """ + $show(res$1));$skip(21); val res$2 = 
-  forall(s14, f_eq2);System.out.println("""res2: Boolean = """ + $show(res$2));$skip(26); val res$3 = 
-  forall(s36, f_gt5_lt10);System.out.println("""res3: Boolean = """ + $show(res$3));$skip(22); val res$4 = 
-  forall(s14, f_even);System.out.println("""res4: Boolean = """ + $show(res$4));$skip(34); val res$5 = 
+  forall(s, f_true);System.out.println("""res2: Boolean = """ + $show(res$2));$skip(23); val res$3 = 
+  forall(s14, f_false);System.out.println("""res3: Boolean = """ + $show(res$3));$skip(21); val res$4 = 
+  forall(s14, f_eq2);System.out.println("""res4: Boolean = """ + $show(res$4));$skip(26); val res$5 = 
+  forall(s36, f_gt5_lt10);System.out.println("""res5: Boolean = """ + $show(res$5));$skip(22); val res$6 = 
+  forall(s14, f_even);System.out.println("""res6: Boolean = """ + $show(res$6));$skip(34); val res$7 = 
 
   // exists
-  exists(s, f_true);System.out.println("""res5: Boolean = """ + $show(res$5));$skip(23); val res$6 = 
-  exists(s14, f_false);System.out.println("""res6: Boolean = """ + $show(res$6));$skip(21); val res$7 = 
-  exists(s14, f_eq2);System.out.println("""res7: Boolean = """ + $show(res$7));$skip(26); val res$8 = 
-  exists(s36, f_gt5_lt10);System.out.println("""res8: Boolean = """ + $show(res$8));$skip(22); val res$9 = 
-  exists(s14, f_even);System.out.println("""res9: Boolean = """ + $show(res$9))}
+  exists(s, f_true);System.out.println("""res7: Boolean = """ + $show(res$7));$skip(23); val res$8 = 
+  exists(s14, f_false);System.out.println("""res8: Boolean = """ + $show(res$8));$skip(21); val res$9 = 
+  exists(s14, f_eq2);System.out.println("""res9: Boolean = """ + $show(res$9));$skip(26); val res$10 = 
+  exists(s36, f_gt5_lt10);System.out.println("""res10: Boolean = """ + $show(res$10));$skip(22); val res$11 = 
+  exists(s14, f_even);System.out.println("""res11: Boolean = """ + $show(res$11));$skip(33); val res$12 = 
   
-  
+util.Properties.versionString;System.out.println("""res12: String = """ + $show(res$12))}
+
 
 }

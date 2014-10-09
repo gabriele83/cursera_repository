@@ -16,6 +16,9 @@ object ws {
   def f_eq2 = (x: Int) => x == 2                  //> f_eq2: => Int => Boolean
   def f_gt5_lt10 = (x: Int) => (x >= 5 && x <= 10)//> f_gt5_lt10: => Int => Boolean
   def f_even = (x: Int) => x % 2 == 0             //> f_even: => Int => Boolean
+  
+  f_eq2(3)                                        //> res0: Boolean = false
+  f_eq2(2)                                        //> res1: Boolean = true
 
   printSet(f_gt5_lt10)                            //> {5,6,7,8,9,10}
 
@@ -45,19 +48,20 @@ object ws {
   printSet(diff(s36, f_gt5_lt10))                 //> {3,4}
 
   // forall
-  forall(s, f_true)                               //> res0: Boolean = true
-  forall(s14, f_false)                            //> res1: Boolean = false
-  forall(s14, f_eq2)                              //> res2: Boolean = false
-  forall(s36, f_gt5_lt10)                         //> res3: Boolean = false
-  forall(s14, f_even)                             //> res4: Boolean = false
+  forall(s, f_true)                               //> res2: Boolean = true
+  forall(s14, f_false)                            //> res3: Boolean = false
+  forall(s14, f_eq2)                              //> res4: Boolean = false
+  forall(s36, f_gt5_lt10)                         //> res5: Boolean = false
+  forall(s14, f_even)                             //> res6: Boolean = false
 
   // exists
-  exists(s, f_true)                               //> res5: Boolean = true
-  exists(s14, f_false)                            //> res6: Boolean = false
-  exists(s14, f_eq2)                              //> res7: Boolean = true
-  exists(s36, f_gt5_lt10)                         //> res8: Boolean = true
-  exists(s14, f_even)                             //> res9: Boolean = true
+  exists(s, f_true)                               //> res7: Boolean = true
+  exists(s14, f_false)                            //> res8: Boolean = false
+  exists(s14, f_eq2)                              //> res9: Boolean = true
+  exists(s36, f_gt5_lt10)                         //> res10: Boolean = true
+  exists(s14, f_even)                             //> res11: Boolean = true
   
-  
+util.Properties.versionString                     //> res12: String = version 2.10.4
+
 
 }
