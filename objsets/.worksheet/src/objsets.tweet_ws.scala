@@ -8,16 +8,19 @@ object tweet_ws {;import org.scalaide.worksheet.runtime.library.WorksheetSupport
   val d = new Tweet("d", "d body", 9);System.out.println("""d  : objsets.Tweet = """ + $show(d ));$skip(27); 
   val set4c = set3.incl(c);System.out.println("""set4c  : objsets.TweetSet = """ + $show(set4c ));$skip(27); 
   val set4d = set3.incl(d);System.out.println("""set4d  : objsets.TweetSet = """ + $show(set4d ));$skip(27); 
-  val set5 = set4c.incl(d);System.out.println("""set5  : objsets.TweetSet = """ + $show(set5 ));$skip(209); 
+  val set5 = set4c.incl(d);System.out.println("""set5  : objsets.TweetSet = """ + $show(set5 ));$skip(210); 
 
   // var filteredSet: TweetSet = set4c.filter(tweet => tweet.retweets > 7)
   // filteredSet.foreach(t => println(t))
 
-	var unionSet: TweetSet = set1 union set2 union set3  union set4c union set4d union set5;System.out.println("""unionSet  : objsets.TweetSet = """ + $show(unionSet ));$skip(37); 
-	
-	unionSet.foreach(t => println(t));$skip(26); val res$0 = 
-	
-	unionSet.mostRetweeted;System.out.println("""res0: objsets.Tweet = """ + $show(res$0))}
-	
+  var unionSet: TweetSet = set1 union set2 union set3 union set4c union set4d union set5;System.out.println("""unionSet  : objsets.TweetSet = """ + $show(unionSet ));$skip(38); 
+
+  unionSet.foreach(t => println(t));$skip(27); val res$0 = 
+
+  unionSet.mostRetweeted;System.out.println("""res0: objsets.Tweet = """ + $show(res$0));$skip(53); 
+
+  val tl: TweetList = unionSet.descendingByRetweet;System.out.println("""tl  : objsets.TweetList = """ + $show(tl ));$skip(49); 
+  TweetReader.allTweets.foreach(t => println(t))}
+  
 
 }
