@@ -14,12 +14,12 @@ object ws {
   val bar: List[Bit] = List(0, 0, 1, 0, 1, 1)     //> bar  : List[patmat.Huffman.Bit] = List(0, 0, 1, 0, 1, 1)
   decode(ct, bar)                                 //> res2: List[Char] = List(c, a, s, a)
   encode(ct)("casa".toList)                       //> res3: List[patmat.Huffman.Bit] = List(0, 0, 1, 0, 1, 1)
-  
+
   decode(Huffman.frenchCode, Huffman.secret)      //> res4: List[Char] = List(h, u, f, f, m, a, n, e, s, t, c, o, o, l)
   decode(Huffman.frenchCode, encode(Huffman.frenchCode)("huffmanestcool".toList))
                                                   //> res5: List[Char] = List(h, u, f, f, m, a, n, e, s, t, c, o, o, l)
 
-  
-  
-                       
+  decode(Huffman.frenchCode, quickEncode(Huffman.frenchCode)("huffmanestcool".toList))
+                                                  //> res6: List[Char] = List(h, u, f, f, m, a, n, e, s, t, c, o, o, l)
+
 }
