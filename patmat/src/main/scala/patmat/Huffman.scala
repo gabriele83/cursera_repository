@@ -168,14 +168,13 @@ object Huffman {
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] = {
 
     def navigate(tr: CodeTree, bs: List[Bit]): List[Char] = (tr, bs) match {
-
       case (Fork(l, r, _, _), xb) => xb match {
-        case 0 :: _ => navigate(l, xb.tail)
-        case 1 :: _ => navigate(r, xb.tail)
-        case _ => throw new IllegalArgumentException("the number must be a sequence of bits to decode")
+        case 0 :: other => navigate(l, other)
+        case 1 :: other => navigate(r, other)
+        case _ => throw new IllegalArgumentException("the number must be a valid sequence of bits to decode")
       }
-      case (Leaf(c, _), xb) => c :: { if (xb.isEmpty) Nil else navigate(tree, xb.tail) }
-      case _ => throw new IllegalArgumentException("invalid sequence of bits to decode")
+      case (Leaf(c, _), xb) => c :: { if (xb.isEmpty) Nil else navigate(tree, xb) }
+      case _ => throw new IllegalArgumentException("the number must be a valid sequence of bits to decode")
     }
 
     navigate(tree, bits)
@@ -197,7 +196,7 @@ object Huffman {
   /**
    * Write a function that returns the decoded secret
    */
-  def decodedSecret: List[Char] = ???
+  def decodedSecret: List[Char] = decode(frenchCode, secret)
 
   // Part 4a: Encoding using Huffman tree
 
@@ -205,7 +204,23 @@ object Huffman {
    * This function encodes `text` using the code tree `tree`
    * into a sequence of bits.
    */
-  def encode(tree: CodeTree)(text: List[Char]): List[Bit] = ???
+  def encode(tree: CodeTree)(text: List[Char]): List[Bit] = {
+
+    def navigate(tr: CodeTree, tx: List[Char]): List[Bit] = (tr, tx) match {
+      case (Fork(l, r, cs, _), head :: other) => {
+        if (cs.contains(head)) {
+          if (chars(l).contains(head)) 0 :: navigate(l, tx) else 1 :: navigate(r, tx)
+        } else {
+          throw new IllegalArgumentException("invalid sequence of chars to encode")
+        }
+      }
+      case (Leaf(c, _), head :: other) => navigate(tree, other)
+      case (_, List()) => Nil
+      case _ => throw new IllegalArgumentException("invalid sequence of chars to encode")
+    }
+
+    navigate(tree, text)
+  }
 
   // Part 4b: Encoding using code table
 

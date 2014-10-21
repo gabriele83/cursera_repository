@@ -9,11 +9,17 @@ object ws {
                                                   //| ,2),Leaf(t,2),List(x, e, t),4)
   weight(sampleTree)                              //> res0: Int = 4
   chars(sampleTree)                               //> res1: List[Char] = List(x, e, t)
-  val ct: CodeTree = createCodeTree("abc".toList) //> ct  : patmat.Huffman.CodeTree = Fork(Fork(Leaf(c,1),Leaf(a,1),List(c, a),2),
-                                                  //| Leaf(b,1),List(c, a, b),3)
-  val bar: List[Bit] = List(0, 1, 1, 1, 0, 0, 0, 1, 0, 1)
-                                                  //> bar  : List[patmat.Huffman.Bit] = List(0, 1, 1, 1, 0, 0, 0, 1, 0, 1)
+  val ct: CodeTree = createCodeTree("casa".toList)//> ct  : patmat.Huffman.CodeTree = Fork(Fork(Leaf(c,1),Leaf(s,1),List(c, s),2),
+                                                  //| Leaf(a,2),List(c, s, a),4)
+  val bar: List[Bit] = List(0, 0, 1, 0, 1, 1)     //> bar  : List[patmat.Huffman.Bit] = List(0, 0, 1, 0, 1, 1)
+  decode(ct, bar)                                 //> res2: List[Char] = List(c, a, s, a)
+  encode(ct)("casa".toList)                       //> res3: List[patmat.Huffman.Bit] = List(0, 0, 1, 0, 1, 1)
+  
+  decode(Huffman.frenchCode, Huffman.secret)      //> res4: List[Char] = List(h, u, f, f, m, a, n, e, s, t, c, o, o, l)
+  decode(Huffman.frenchCode, encode(Huffman.frenchCode)("huffmanestcool".toList))
+                                                  //> res5: List[Char] = List(h, u, f, f, m, a, n, e, s, t, c, o, o, l)
 
-  decode(ct, bar)                                 //> res2: List[Char] = List(a, b, c, a)
-
+  
+  
+                       
 }
