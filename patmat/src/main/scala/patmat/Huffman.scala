@@ -1,6 +1,7 @@
 package patmat
 
 import common._
+import scala.annotation.tailrec
 
 /**
  * Assignment 4: Huffman coding
@@ -25,13 +26,13 @@ object Huffman {
   // Part 1: Basics
 
   def weight(tree: CodeTree): Int = tree match {
-    case Fork(left, right, _, _) => weight(left) + weight(right)
+    case Fork(_, _, _, weight) => weight
     case Leaf(_, weight) => weight
   }
 
   def chars(tree: CodeTree): List[Char] = tree match {
-    case Fork(left, right, _, _) => chars(left) ::: chars(right)
     case Leaf(char, _) => List(char)
+    case Fork(_, _, cs, _) => cs
   }
 
   def makeCodeTree(left: CodeTree, right: CodeTree) =
@@ -82,24 +83,10 @@ object Huffman {
    * head of the list should have the smallest weight), where the weight
    * of a leaf is the frequency of the character.
    */
+
   def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = {
-
-    def ins_sort(xs: List[(Char, Int)]): List[Leaf] = xs match {
-      case List() => List()
-      case y :: ys => insert(y, ins_sort(ys))
-    }
-
-    def insert(x: (Char, Int), xs: List[Leaf]): List[Leaf] = xs match {
-      case List() => List(Leaf(x._1, x._2))
-      case y :: ys => if (x._2 < y.weight) {
-        Leaf(x._1, x._2) :: xs
-      } else {
-        y :: insert(x, ys)
-      }
-    }
-
-    ins_sort(freqs)
-
+    val sortedList: List[(Char, Int)] = freqs.sortWith((tupla1, tupla2) => tupla1._2 < tupla2._2)
+    sortedList.map(elem => Leaf(elem._1, elem._2))
   }
 
   /**
@@ -141,10 +128,8 @@ object Huffman {
    *    the example invocation. Also define the return type of the `until` function.
    *  - try to find sensible parameter names for `xxx`, `yyy` and `zzz`.
    */
-  def until[T](untilCondition: T => Boolean, operation: T => T)(input: T): T = untilCondition(input) match {
-    case true => input
-    case false => this.until(untilCondition, operation)(operation(input))
-  }
+  @tailrec
+  def until[T](untilCondition: T => Boolean, operation: T => T)(input: T): T = if (untilCondition(input)) input else this.until(untilCondition, operation)(operation(input))
 
   /**
    * This function creates a code tree which is optimal to encode the text `chars`.
