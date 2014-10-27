@@ -103,7 +103,18 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = ??? // x.map( elem => elem)
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = {
+    val zero: List[(Char, Int)] = List()
+    x.foldLeft(zero)((c,i) => {
+       y.find((t1: (Char,Int)) => t1._1 == c)
+       
+       // TODO
+       
+       
+       // match {
+     
+      zero})
+  }
 
   /**
    * Returns a list of all anagram sentences of the given sentence.
