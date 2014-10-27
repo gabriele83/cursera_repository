@@ -105,7 +105,7 @@ object Anagrams {
    */
   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
     val zero: List[(Char, Int)] = List()
-    (x foldLeft [Occurrences](zero))({case (accumulator, tupla) => {
+    (x foldRight [Occurrences](zero))({case (tupla, accumulator) => {
         val elem: Option[(Char, Int)] = y.find((t1: (Char, Int)) => t1._1 == tupla._1)
         elem match {
         	case Some(x) => if(x._2 == tupla._2) accumulator else (tupla._1, tupla._2-x._2) :: accumulator
