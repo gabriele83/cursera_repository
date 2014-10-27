@@ -155,6 +155,11 @@ object Anagrams {
    *
    *  Note: There is only one anagram of an empty sentence.
    */
-  def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+  def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
+    val combo: List[Occurrences] = combinations(sentenceOccurrences(sentence))
+    
+    
+    List()
+  }
 
 }
