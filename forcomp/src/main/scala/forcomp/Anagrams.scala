@@ -87,8 +87,8 @@ object Anagrams {
    */
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     val zero: Occurrences = Nil
-    (occurrences foldLeft List[Occurrences](zero))({
-      case (accumulator, (char, number)) => { accumulator ++ (for (o: Occurrences <- accumulator; n: Int <- 1 to number) yield (char, n) :: o) }
+    (occurrences foldRight List[Occurrences](zero))({
+      case ((char, number) , accumulator) => { accumulator ++ (for (o: Occurrences <- accumulator; n: Int <- 1 to number) yield (char, n) :: o) }
     })
   }
 
@@ -106,8 +106,7 @@ object Anagrams {
   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
     val zero: List[(Char, Int)] = List()
     (x foldRight [Occurrences](zero))({case (tupla, accumulator) => {
-        val elem: Option[(Char, Int)] = y.find((t1: (Char, Int)) => t1._1 == tupla._1)
-        elem match {
+         y.find((t1: (Char, Int)) => t1._1 == tupla._1) match {
         	case Some(x) => if(x._2 == tupla._2) accumulator else (tupla._1, tupla._2-x._2) :: accumulator
         	case None => tupla :: accumulator
     		}
