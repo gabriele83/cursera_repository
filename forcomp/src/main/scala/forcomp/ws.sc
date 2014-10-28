@@ -2,15 +2,22 @@ package forcomp
 import forcomp.Anagrams._
 
 object ws {
-  val x = List(('a', 1), ('d', 1), ('l', 1), ('r', 1))
-                                                  //> x  : List[(Char, Int)] = List((a,1), (d,1), (l,1), (r,1))
-  val y = List(('r', 1))                          //> y  : List[(Char, Int)] = List((r,1))
- // List(('a', 1), ('d', 1), ('l', 1))
-  subtract(x, y)                                  //> -->(List(),(a,1))<--
-                                                  //| -->(List(),(d,1))<--
-                                                  //| -->(List(),(l,1))<--
-                                                  //| -->(List(),(r,1))<--
-                                                  //| res0: forcomp.Anagrams.Occurrences = List()
-  
-  
+
+	sentenceAnagrams(List())                  //> java.lang.UnsupportedOperationException: empty.reduceLeft
+                                                  //| 	at scala.collection.LinearSeqOptimized$class.reduceLeft(LinearSeqOptimiz
+                                                  //| ed.scala:124)
+                                                  //| 	at scala.collection.immutable.List.reduceLeft(List.scala:84)
+                                                  //| 	at forcomp.Anagrams$.sentenceOccurrences(Anagrams.scala:42)
+                                                  //| 	at forcomp.Anagrams$.sentenceAnagrams(Anagrams.scala:169)
+                                                  //| 	at forcomp.ws$$anonfun$main$1.apply$mcV$sp(forcomp.ws.scala:6)
+                                                  //| 	at org.scalaide.worksheet.runtime.library.WorksheetSupport$$anonfun$$exe
+                                                  //| cute$1.apply$mcV$sp(WorksheetSupport.scala:76)
+                                                  //| 	at org.scalaide.worksheet.runtime.library.WorksheetSupport$.redirected(W
+                                                  //| orksheetSupport.scala:65)
+                                                  //| 	at org.scalaide.worksheet.runtime.library.WorksheetSupport$.$execute(Wor
+                                                  //| ksheetSupport.scala:75)
+                                                  //| 	at forcomp.ws$.main(forcomp.ws.scala:4)
+                                                  //| 	at forcomp.ws.main(forcomp.ws.scala)
+  sentenceAnagrams(List("Linux", "rulez"))
+
 }

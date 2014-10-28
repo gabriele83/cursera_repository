@@ -1,6 +1,7 @@
 package forcomp
 
 import common._
+import scala.collection.immutable.Nil
 
 object Anagrams {
 
@@ -39,7 +40,7 @@ object Anagrams {
   def wordOccurrences(w: Word): Occurrences = (w.toLowerCase().toList groupBy (c => c) mapValues (c => c.size)).toList sorted
 
   /** Converts a sentence into its character occurrence list. */
-  def sentenceOccurrences(s: Sentence): Occurrences = wordOccurrences(s.reduceLeft(_ + _))
+  def sentenceOccurrences(s: Sentence): Occurrences = if(s.isEmpty) List() else wordOccurrences(s.reduceLeft(_ + _))
 
   /**
    * The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
@@ -88,7 +89,7 @@ object Anagrams {
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     val zero: Occurrences = Nil
     (occurrences foldRight List[Occurrences](zero))({
-      case ((char, number) , accumulator) => { accumulator ++ (for (o: Occurrences <- accumulator; n: Int <- 1 to number) yield (char, n) :: o) }
+      case ((char, number), accumulator) => { accumulator ++ (for (o: Occurrences <- accumulator; n: Int <- 1 to number) yield (char, n) :: o) }
     })
   }
 
@@ -105,12 +106,13 @@ object Anagrams {
    */
   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
     val zero: List[(Char, Int)] = List()
-    (x foldRight [Occurrences](zero))({case (tupla, accumulator) => {
-         y.find((t1: (Char, Int)) => t1._1 == tupla._1) match {
-        	case Some(x) => if(x._2 == tupla._2) accumulator else (tupla._1, tupla._2-x._2) :: accumulator
-        	case None => tupla :: accumulator
-    		}
-    	}
+    (x foldRight (zero))({
+      case (tupla, accumulator) => {
+        y.find((t1: (Char, Int)) => t1._1 == tupla._1) match {
+          case Some(x) => if (x._2 == tupla._2) accumulator else (tupla._1, tupla._2 - x._2) :: accumulator
+          case None => tupla :: accumulator
+        }
+      }
     })
   }
 
@@ -156,10 +158,15 @@ object Anagrams {
    *  Note: There is only one anagram of an empty sentence.
    */
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
-    val combo: List[Occurrences] = combinations(sentenceOccurrences(sentence))
-    
-    
-    List()
+    def occurrencesIter(occurrences: Occurrences): List[Sentence] = {
+      if (!occurrences.isEmpty) {
+        for {
+          combo: Occurrences <- combinations(occurrences)
+          word: Word <- dictionaryByOccurrences.getOrElse(combo, Nil)
+          sentence: Sentence <- occurrencesIter(subtract(occurrences, wordOccurrences(word)))
+        } yield word :: sentence
+      } else List(Nil)
+    }
+    occurrencesIter(sentenceOccurrences(sentence))
   }
-
 }
